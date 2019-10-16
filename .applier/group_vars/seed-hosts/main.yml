@@ -9,7 +9,9 @@ openshift_cluster_content:
   - role: self/roles/discover
   content:
   - name: GitOps Config
-    template: "{{ inventory_dir }}/../templates/cluster-gitops.yaml"
+    params_from_vars:
+      SCHEDULE: "{{ gitops_schedule }}"
+  template: "{{ inventory_dir }}/../templates/cluster-gitops.yaml"
     tags:
     - gitops
 - object: OpenShift Machine API
